@@ -1,16 +1,28 @@
 import Head from "next/head";
+import Link from "next/link";
+import NavBar from "./NavBar";
 import styles from "../styles/Layout.module.css"
 
-export default function Layout({children, title, description}) {
+
+export default function Layout({children, title, description, home}) {
   return (
     <div className={styles.container}>
         <Head>
+            <link rel="icon" href="/favicon.ico" />
             <title>{title}</title>
             <meta name="Description" content={description}/>
         </Head>
-        <nav>navbar</nav>
+        <NavBar></NavBar>
         <main>{children}</main>
-        <footer>footer</footer>
+        <footer>
+          {!home && (
+            <div className={styles.backToHome}>
+              <Link href="/">
+                <a>Back to home</a>
+              </Link>
+            </div>
+          )}
+        </footer>
     </div>
   );
 }
